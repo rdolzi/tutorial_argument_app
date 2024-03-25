@@ -34,13 +34,16 @@ const [isRemoveModalShowing, setIsRemoveModalShowing] = useState(undefined);
      navigate("/addArgument/" + id);
    };
 
-   const removeArgument = (isRemoveModalShowing, idArgument) => {
-     fetch(`http://localhost:8080/rest/api/tutorials/arguments/${idArgument}`, {
-       method: "DELETE",
-     })
+   const removeArgument = () => {
+     fetch(
+       `http://localhost:8080/rest/api/tutorials/arguments/${isRemoveModalShowing}`,
+       {
+         method: "DELETE",
+       }
+     )
        .then((response) => response.json())
        .then(async () => {
-         const apiUrl = `http://localhost:8080/rest/api/tutorials/${isRemoveModalShowing}/arguments`;
+         const apiUrl = `http://localhost:8080/rest/api/tutorials/${id}/arguments`;
 
          const response = await fetch(apiUrl);
 
@@ -59,10 +62,10 @@ const [isRemoveModalShowing, setIsRemoveModalShowing] = useState(undefined);
     <>
       <ArgumentTable
         data={data}
-        id={id}
+        idTutorial={id}
         addArgument={addArgument}
         updateArgument={updateArgument}
-        removeArgument={setIsRemoveModalShowing}
+        pippoModal={setIsRemoveModalShowing}
       />
       {isRemoveModalShowing !== undefined && (
         <Modal

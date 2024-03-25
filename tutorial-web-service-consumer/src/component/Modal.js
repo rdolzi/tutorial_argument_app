@@ -28,7 +28,8 @@ export default function Modal({ confirm, title, description, confirmTitle, close
             <button
               type="button"
               class="btn btn-primary"
-              onClick={confirm}
+              onClick={()=>{confirm();
+              closeModal()}}
             >
               {confirmTitle}
             </button>
