@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PageHeader from "../component/PageHeader";
-import TutorialTable from "../component/TutorialTable";
+
 import Modal from "../component/Modal";
+import { TutorialTable } from "../component";
 
 
 const TutorialList = () => {
@@ -72,7 +73,7 @@ const TutorialList = () => {
         tutorialToUpdate={tutorialToUpdate}
         getArguments={getArguments}
       />
-      { isRemoveModalShowing != undefined && <Modal
+      { isRemoveModalShowing !== undefined && <Modal
         confirm={removeTutorial}
         title={"Elimina tutorial"}
         description={"Sei sicuro di voler eliminare il tutorial?"}

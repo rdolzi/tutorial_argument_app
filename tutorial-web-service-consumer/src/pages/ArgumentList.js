@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Modal from "../component/Modal";
+import ArgumentTable from "../component/ArgumentTable";
 
 const ArgumentList = () => {
 
 let navigate = useNavigate();
+const [isRemoveModalShowing, setIsRemoveModalShowing] = useState(undefined);
   const { id } = useParams();
   const [data, setData] = useState([]);
 
@@ -31,13 +34,13 @@ let navigate = useNavigate();
      navigate("/addArgument/" + id);
    };
 
-   const removeArgument = (idTutorial, idArgument) => {
+   const removeArgument = (isRemoveModalShowing, idArgument) => {
      fetch(`http://localhost:8080/rest/api/tutorials/arguments/${idArgument}`, {
        method: "DELETE",
      })
        .then((response) => response.json())
        .then(async () => {
-         const apiUrl = `http://localhost:8080/rest/api/tutorials/${idTutorial}/arguments`;
+         const apiUrl = `http://localhost:8080/rest/api/tutorials/${isRemoveModalShowing}/arguments`;
 
          const response = await fetch(apiUrl);
 
@@ -53,44 +56,24 @@ let navigate = useNavigate();
    };
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Technology</th>
-          <th>
-            <button className="btn btn-success" onClick={() => addArgument(id)}>
-              Add Argument
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((argument) => (
-          <tr key={argument.id}>
-            <td>{argument.id}</td>
-            <td>{argument.technology}</td>
-            <td></td>
-            <td>
-              <button
-                className="btn btn-primary mr-2"
-                onClick={() => updateArgument(id, argument.id)}
-              >
-                Update
-              </button>
-            </td>
-            <td>
-              <button
-                className="btn btn-danger"
-                onClick={() => removeArgument(id,argument.id)}
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      <ArgumentTable
+        data={data}
+        id={id}
+        addArgument={addArgument}
+        updateArgument={updateArgument}
+        removeArgument={setIsRemoveModalShowing}
+      />
+      {isRemoveModalShowing !== undefined && (
+        <Modal
+          confirm={removeArgument}
+          title={"Elimina Argomento"}
+          description={"Sei sicuro di voler eliminare l argomento?"}
+          confirmTitle={"Elimina"}
+          closeModal={() => setIsRemoveModalShowing(undefined)}
+        />
+      )}
+    </>
   );
 };
 
