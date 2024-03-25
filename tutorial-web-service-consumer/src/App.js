@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, AddTutorial, UpdateTutorial, TutorialList, NavBar, ArgumentList, AddArgument, UpdateArgument } from "./component";
+import { Home, AddTutorial, UpdateTutorial, NavBar, ArgumentList, AddArgument, UpdateArgument } from "./component";
+import TutorialList from "./pages/TutorialList";
 
 // function App() {
 //   return (

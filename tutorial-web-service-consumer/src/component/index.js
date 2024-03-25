@@ -1,5 +1,4 @@
 export { default as Home } from "./Home";
-export { default as TutorialList } from "./TutorialList";
 export { default as AddTutorial } from "./AddTutorial";
 export { default as UpdateTutorial } from "./UpdateTutorial";
 export { default as NavBar } from "./NavBar";
