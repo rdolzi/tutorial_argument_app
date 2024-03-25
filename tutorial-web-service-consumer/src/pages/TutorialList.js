@@ -49,6 +49,9 @@ const TutorialList = () => {
         if (response.ok) {
           const jsonData = await response.json();
           setData(jsonData);
+        } else {
+          setData([]);
+          console.log("NO ARGUMENTS");
         }
         setIsRemoveModalShowing(undefined);
       });

@@ -50,7 +50,11 @@ const [isRemoveModalShowing, setIsRemoveModalShowing] = useState(undefined);
          if (response.ok) {
            const jsonData = await response.json();
            setData(jsonData);
+         }else{
+          setData([]);
+          console.log("NO ARGUMENTS");
          }
+
        });
    };
 
@@ -60,6 +64,10 @@ const [isRemoveModalShowing, setIsRemoveModalShowing] = useState(undefined);
 
   return (
     <>
+      <PageHeader
+        title={"Lista tutorial"}
+        subtitle={`i tutoria disponibili sono ${data.length}`}
+      />
       <ArgumentTable
         data={data}
         idTutorial={id}
