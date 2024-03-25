@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../component/Modal";
 import ArgumentTable from "../component/ArgumentTable";
+import PageHeader from "../component/PageHeader";
 
 const ArgumentList = () => {
 
@@ -62,18 +63,25 @@ const [isRemoveModalShowing, setIsRemoveModalShowing] = useState(undefined);
      navigate("/tutorial/" + idTutorial + "/argument/" + idArgument);
    };
 
+   const doNavigate = (url) => {
+     navigate(url);
+   };
+   
   return (
     <>
       <PageHeader
         title={"Lista tutorial"}
         subtitle={`i tutoria disponibili sono ${data.length}`}
+        func={() => {
+          doNavigate(`/addArgument/${id}`);
+        }}
       />
       <ArgumentTable
         data={data}
         idTutorial={id}
         addArgument={addArgument}
         updateArgument={updateArgument}
-        pippoModal={setIsRemoveModalShowing}
+        closeModal={setIsRemoveModalShowing}
       />
       {isRemoveModalShowing !== undefined && (
         <Modal

@@ -3,7 +3,7 @@ const ArgumentTable = ({
   idTutorial,
   addArgument,
   updateArgument,
-  pippoModal,
+  closeModal,
 }) => {
   return (
     <>
@@ -40,7 +40,7 @@ const ArgumentTable = ({
                 <button
                   className="btn btn-danger"
                   onClick={() => {
-                    pippoModal(argument.id);
+                    closeModal(argument.id);
                   }}
                 >
                   Delete

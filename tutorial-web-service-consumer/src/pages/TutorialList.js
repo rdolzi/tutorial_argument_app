@@ -64,11 +64,15 @@ const TutorialList = () => {
     navigate("/getArgumentsById/" + id);
   };
 
+  const doNavigate = (url) =>{
+    navigate(url);
+  }
   return (
     <>
       <PageHeader
         title={"Lista tutorial"}
         subtitle={`i tutoria disponibili sono ${data.length}`}
+        func={() =>{doNavigate("/addTutorial")}}
       />
       <TutorialTable
         data={data}
@@ -76,13 +80,15 @@ const TutorialList = () => {
         tutorialToUpdate={tutorialToUpdate}
         getArguments={getArguments}
       />
-      { isRemoveModalShowing !== undefined && <Modal
-        confirm={removeTutorial}
-        title={"Elimina tutorial"}
-        description={"Sei sicuro di voler eliminare il tutorial?"}
-        confirmTitle={"Elimina"}
-        closeModal={() => setIsRemoveModalShowing(undefined)}
-      />}
+      {isRemoveModalShowing !== undefined && (
+        <Modal
+          confirm={removeTutorial}
+          title={"Elimina tutorial"}
+          description={"Sei sicuro di voler eliminare il tutorial?"}
+          confirmTitle={"Elimina"}
+          closeModal={() => setIsRemoveModalShowing(undefined)}
+        />
+      )}
     </>
   );
 };
